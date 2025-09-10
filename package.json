@@ -1,0 +1,35 @@
+{
+  "name": "sania-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.46",
+    "bcrypt": "^6.0.0",
+    "crypto": "^1.0.1",
+    "jose": "^6.0.11",
+    "mysql2": "^3.14.1",
+    "next": "15.3.2",
+    "pg-hstore": "^2.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "react-toastify": "^11.0.5",
+    "resend": "^6.0.2",
+    "sequelize": "^6.8.0",
+    "use-resettable-action-state": "^0.0.8",
+    "zod": "^3.25.57"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "tailwindcss": "^4"
+  }
+}
