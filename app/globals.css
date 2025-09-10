@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.truncate_2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.truncate_1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+@layer components {
+  .My-Input-Wrapper {
+    @apply w-full flex items-center rounded-xl gap-0 relative flex-col text-lg;
+  }
+  .My-Input {
+    @apply w-full bg-transparent text-slate-700 text-2xl border border-slate-200 rounded-lg pl-3 pr-8 py-4 appearance-none cursor-pointer focus:outline-none focus:border-slate-400 hover:border-slate-400 focus:shadow-md;
+  }
+  .Confirm-Btn {
+    @apply bg-blue-600 cursor-pointer text-white py-3 px-12 rounded-lg w-full;
+  }
+  .Cancel-Btn {
+    @apply bg-red-500 cursor-pointer text-white py-3 px-12 rounded-lg w-full;
+  }
+  .Form-Container {
+    @apply bg-white rounded-2xl px-10 py-12  flex flex-col  justify-center items-center space-y-2;
+  }
+  .Button-Wrapper {
+    @apply flex flex-row justify-between space-x-2 w-full;
+  }
+  .Page-Container {
+    @apply w-[640px] mx-auto p-4;
+  }
+  .primary-button {
+    @apply bg-black rounded-lg py-2 px-8 text-white text-xs cursor-pointer hover:bg-blue-600 shadow-2xl;
+  }
+  .logout-button {
+    @apply px-8 py-3 rounded-xl hover:bg-blue-900 cursor-pointer bg-black shadow-2xl;
+  }
+
+  .Page-Layout-Col {
+    @apply container mx-auto min-h-[700px] flex flex-col;
+  }
+
+  .Page-Layout-Row {
+    @apply container mx-auto h-full min-h-[700px] flex flex-row;
+  }
+
+  ._flex_col {
+    @apply flex flex-col;
+  }
+  ._flex_row {
+    @apply flex flex-row;
+  }
+}
