@@ -19,12 +19,16 @@ const StorePage = async () => {
   );
 
   return (
-    <StoreSettingsPage
-      bisnisList={JSON.stringify(bisnisListSort(bisnisList))}
-      branchList={JSON.stringify(branchListSort(branchList))}
-      staffList={JSON.stringify(staffListSort(staffList))}
-      staffRole={JSON.stringify(staffRole)}
-    />
+    <div>
+      {JSON.stringify(authUser)}
+
+      <StoreSettingsPage
+        bisnisList={JSON.stringify(bisnisListSort(bisnisList))}
+        branchList={JSON.stringify(branchListSort(branchList))}
+        staffList={JSON.stringify(staffListSort(staffList))}
+        staffRole={JSON.stringify(staffRole)}
+      />
+    </div>
   );
 };
 
