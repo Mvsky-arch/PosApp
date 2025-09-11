@@ -1,3 +1,4 @@
+"use server";
 import getAuthUser from "@/lib/GetAuthUser";
 import { redirect } from "next/navigation";
 
