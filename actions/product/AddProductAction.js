@@ -48,7 +48,7 @@ const AddProductAction = async (state, formData) => {
     if (thumbnail.size > 0) {
       url = await UploadThumbnail(thumbnail, bisnis_id, productId, null);
     } else {
-      url = "http://localhost:3000/empty.jpg";
+      url = "http://103.197.191.88:3000/empty.jpg";
     }
 
     ProductTable.create({
@@ -113,7 +113,7 @@ const UploadThumbnail = async (file, foldername, filename, url) => {
   const buffer = Buffer.from(await file.arrayBuffer());
   await fs.writeFile(filePath, buffer);
 
-  return `http://localhost:3000/uploads/${foldername}/${fileNameWithExt}`;
+  return `http://103.197.191.88:3000/uploads/${foldername}/${fileNameWithExt}`;
 };
 
 export default AddProductAction;
