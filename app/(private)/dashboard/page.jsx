@@ -10,6 +10,7 @@ const DashboardPage = async () => {
 
   return (
     <div className="container mx-auto p-4 min-h-[calc(100vh-150px)]">
+      <div>Session Name : {process.env.SESSION_NAME}</div>
       <div>AuthUser : {JSON.stringify(authUser)}</div>
       Dashboard Page
     </div>
