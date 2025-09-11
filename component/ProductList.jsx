@@ -76,6 +76,7 @@ const Product = ({ name, price, url, id }) => {
           height={100}
           alt="Product Images"
           className="w-full "
+          unoptimized
         />
       </div>
       <div className="w-full px-4 py-2">
