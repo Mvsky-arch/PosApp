@@ -14,26 +14,33 @@ import {
 const GetStoreData = async (user_id) => {
   const bisnisList = await BisnisTable.findAll({
     where: { user_id, is_active: 1 },
+    raw: true,
   });
 
+  console.log(bisnisList);
   const branchList = await BranchTable.findAll({
     where: { user_id, is_active: 1 },
+    raw: true,
   });
 
   const staffList = await StaffTable.findAll({
     where: { user_id, is_active: 1 },
+    raw: true,
   });
 
   const staffRole = await StaffRoleTable.findAll({
     where: { user_id, is_active: 1 },
+    raw: true,
   });
 
   const kategory = await KategoryTable.findAll({
     where: { user_id, is_active: 1 },
+    raw: true,
   });
 
   const productList = await ProductTable.findAll({
     where: { user_id, is_active: 1 },
+    raw: true,
   });
 
   return {
@@ -43,6 +50,48 @@ const GetStoreData = async (user_id) => {
     staffRole,
     kategory,
     productList,
+  };
+};
+
+export const GetStoreDataPlain = async (user_id) => {
+  const bisnisList = await BisnisTable.findAll({
+    where: { user_id, is_active: 1 },
+    raw: true,
+  });
+
+  console.log(bisnisList);
+  const branchList = await BranchTable.findAll({
+    where: { user_id, is_active: 1 },
+    raw: true,
+  });
+
+  const staffList = await StaffTable.findAll({
+    where: { user_id, is_active: 1 },
+    raw: true,
+  });
+
+  const staffRole = await StaffRoleTable.findAll({
+    where: { user_id, is_active: 1 },
+    raw: true,
+  });
+
+  const kategory = await KategoryTable.findAll({
+    where: { user_id, is_active: 1 },
+    raw: true,
+  });
+
+  const productList = await ProductTable.findAll({
+    where: { user_id, is_active: 1 },
+    raw: true,
+  });
+
+  return {
+    bisnisList: JSON.stringify(bisnisList),
+    branchList: JSON.stringify(branchList),
+    staffList: JSON.stringify(staffList),
+    staffRole: JSON.stringify(staffRole),
+    kategory: JSON.stringify(kategory),
+    productList: JSON.stringify(productList),
   };
 };
 
