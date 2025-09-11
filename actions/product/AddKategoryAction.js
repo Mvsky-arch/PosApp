@@ -36,6 +36,7 @@ const AddKategoryAction = async (state, formData) => {
         kategory_name,
         bisnis_id,
         user_id: id,
+        is_active: 1,
       });
 
       message = kategory_name + " Add Completed";

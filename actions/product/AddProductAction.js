@@ -61,6 +61,7 @@ const AddProductAction = async (state, formData) => {
       product_url: url,
       is_active: 1,
       kategory_id,
+      is_active: 1,
     });
 
     message = product_name + " Add Completed";

@@ -61,6 +61,7 @@ const RegisterAction = async (state, formData) => {
     password: hashPassword.toString(),
     isVerified: 0,
     verifyToken,
+    is_active: 1,
   });
 
   // await SendingEmail(email);

@@ -54,6 +54,7 @@ const AddStaffAction = async (state, formData) => {
       phone,
       email,
       user_id: id,
+      is_active: 1,
     });
 
     return {

@@ -40,6 +40,7 @@ const BranchSavingActions = async (state, formData) => {
       branchAddress,
       user_id: id,
       bisnis_id,
+      is_active: 1,
     });
 
     return {

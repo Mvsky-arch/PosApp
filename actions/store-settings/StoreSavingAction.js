@@ -51,6 +51,7 @@ const StoreSavingAction = async (state, formData) => {
       businnessPhone,
       businnessAddress,
       user_id: id,
+      is_active: 1,
     });
 
     await BranchTable.create({
@@ -60,6 +61,7 @@ const StoreSavingAction = async (state, formData) => {
       branchAddress,
       user_id: id,
       bisnis_id: bisnisId,
+      is_active: 1,
     });
 
     await KategoryTable.create({
