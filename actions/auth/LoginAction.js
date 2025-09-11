@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import Users from "@/models/TableModel.js";
 import { LoginFormSchema } from "@/lib/Rules";
 import { createSession } from "@/lib/Session";
+import { redirect } from "next/navigation";
 
 const LoginAction = async (state, formData) => {
   const email = formData.get("email").toLowerCase();
@@ -62,13 +63,13 @@ const LoginAction = async (state, formData) => {
       user.dataValues.email
     );
 
+    // redirect("/dashboard");
     return {
       message: "Login Accepted ....",
       success: true,
       email,
       password,
     };
-    //    redirect("/dashboard");
   } catch (error) {
     console.log(error);
   }

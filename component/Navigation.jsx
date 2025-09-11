@@ -13,7 +13,7 @@ const Navigation = async () => {
 
   return (
     <div className="flex flex-row justify-between w-full px-8 items-center">
-      {JSON.stringify(authUser)}
+      {/* {JSON.stringify(authUser)} */}
       <NavLink href="/" label="Home" />
       <div className="space-x-4 items-center">
         {authUser ? (
