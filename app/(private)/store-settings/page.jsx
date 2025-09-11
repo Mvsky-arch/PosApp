@@ -20,8 +20,7 @@ const StorePage = async () => {
 
   return (
     <div>
-      {JSON.stringify(authUser)}
-
+      User : {JSON.stringify(authUser)}
       <StoreSettingsPage
         bisnisList={JSON.stringify(bisnisListSort(bisnisList))}
         branchList={JSON.stringify(branchListSort(branchList))}
