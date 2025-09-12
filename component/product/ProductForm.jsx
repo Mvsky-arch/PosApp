@@ -567,7 +567,7 @@ const ProductItem = ({ product, productClicked, setProductClicked }) => {
             width={40}
             height={40}
             alt={product.product_url}
-            className="w-18 rounded-full"
+            className="w-14 rounded-full"
           />
         </span>
         <span className="truncate_1 w-full text-sm py-4">
