@@ -210,11 +210,11 @@ const ProductForm = ({
             }}
           >
             <div className="relative h-[150px] w-[150px]">
-              <img
+              <Image
                 src={defaultUrl}
                 width={50}
                 height={50}
-                alt="Product Images"
+                alt={defaultUrl}
                 className="w-full rounded-2xl"
               />
             </div>
@@ -562,11 +562,11 @@ const ProductItem = ({ product, productClicked, setProductClicked }) => {
         }}
       >
         <span className="pl-4">
-          <img
+          <Image
             src={product.product_url}
             width={40}
             height={40}
-            alt="Picture of the author"
+            alt={product.product_url}
             className="w-full rounded-full"
           />
         </span>
@@ -628,7 +628,7 @@ function ImageSelectorModal({ isOpen, onCancel, setDefaultUrl }) {
                       onCancel();
                     }}
                   >
-                    <img
+                    <Image
                       src={imageurl}
                       width={100}
                       height={100}
