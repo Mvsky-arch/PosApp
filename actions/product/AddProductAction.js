@@ -45,11 +45,11 @@ const AddProductAction = async (state, formData) => {
   if (actions === "Insert") {
     const productId = Date.now();
 
-    if (thumbnail.size > 0) {
-      url = await UploadThumbnail(thumbnail, bisnis_id, productId, null);
-    } else {
-      url = "/empty.jpg";
-    }
+    // if (thumbnail.size > 0) {
+    //   url = await UploadThumbnail(thumbnail, bisnis_id, productId, null);
+    // } else {
+    //   url = "/empty.jpg";
+    // }
 
     ProductTable.create({
       id: productId,
@@ -58,7 +58,7 @@ const AddProductAction = async (state, formData) => {
       product_price,
       bisnis_id,
       user_id: id,
-      product_url: url,
+      product_url,
       is_active: 1,
       kategory_id,
       is_active: 1,
@@ -68,9 +68,9 @@ const AddProductAction = async (state, formData) => {
   }
 
   if (actions === "Update") {
-    if (thumbnail.size > 0) {
-      await UploadThumbnail(thumbnail, bisnis_id_hid, null, product_url);
-    }
+    // if (thumbnail.size > 0) {
+    //   await UploadThumbnail(thumbnail, bisnis_id_hid, null, product_url);
+    // }
 
     await ProductTable.update(
       {

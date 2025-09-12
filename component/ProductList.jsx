@@ -7,9 +7,9 @@ const ProductList = ({ productData, bisnisIdSelected, kategoryIdSelected }) => {
   let isProductFound = false;
   const router = useRouter();
   return (
-    <div className="flex flex-col w-full min-h-[500px]  py-10">
-      <div className="grid grid-cols-6 gap-y-4 gap-x-4 max-h-[500px] overflow-auto p-6">
-        {productListObj.map((item) => {
+    <div className="flex flex-col w-full min-h-[600px]">
+      <div className="grid grid-cols-6 w-full gap-y-4 gap-x-4 max-h-[550px] overflow-auto p-6">
+        {productListObj?.map((item) => {
           if (item.bisnis_id !== bisnisIdSelected) return null;
 
           if (kategoryIdSelected === 0) {
@@ -54,16 +54,16 @@ const ProductList = ({ productData, bisnisIdSelected, kategoryIdSelected }) => {
           }
         })}
       </div>
-      {!isProductFound && (
-        <div className="p-12">
+      {/* {!isProductFound && (
+        <div className="p-12 w-full items-center bg-blue-300">
           Produk Pada Kategory Ini Tidak Ditemukan !!!!
         </div>
-      )}
+      )} */}
     </div>
   );
 };
 
-const Product = ({ name, price, url, id }) => {
+const Product = ({ name, price, url }) => {
   return (
     <div
       className="flex flex-col w-full rounded-lg border-1 hover:border-slate-800 border-slate-300 hover:shadow-2xl shadow-xl items-start

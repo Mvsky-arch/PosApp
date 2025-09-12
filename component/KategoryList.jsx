@@ -22,7 +22,7 @@ const KategoryList = ({
   }, [bisnisIdSelected]);
 
   return (
-    <div className="_flex-col w-[70%]  bg-slate-200">
+    <div className="_flex-col w-[70%] bg-slate-200">
       <LabelWithNumber label="Kategory List" number={kategoryLength} />
       <ul className="_flex_row p-2 gap-2 flex-wrap border-b-1 border-slate-400">
         <AllItemButton

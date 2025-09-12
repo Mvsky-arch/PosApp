@@ -20,10 +20,13 @@ import AddProductAction from "@/actions/product/AddProductAction";
 import { InsertUpdateSelector } from "@/component/item/button/PrimaryButton";
 import { useAddProductContext } from "@/context/AddProductContext";
 
+import { AppConfig } from "@/config/Const";
+
 import {
   getProductByBisnisId,
   getProductByKategoryId,
 } from "@/lib/MapFilterLib";
+import BrowseImage from "@/actions/product/BrowseImage";
 
 const ProductFormLayout = ({ bisnisData, kategoryData, productData }) => {
   const params = useSearchParams();
@@ -83,14 +86,15 @@ const ProductForm = ({
     AddProductAction,
     {}
   );
-  const [selectedFiles, setSelectedFiles] = useState(null);
+
   const [defaultUrl, setDefaultUrl] = useState(
-    "http://localhost:3000/empty.jpg"
+    AppConfig.url_image + "default.jpg"
   );
 
-  const [open, setOpen] = useState(true);
+  const [isopenSuccessModal, setIsOpenSuccessModal] = useState(true);
+  const [isOpenImageSelectorModal, setIsOpenImageSelectorModal] =
+    useState(false);
 
-  const fileRef = useRef();
   const actionsElement = useRef();
   const productIdElement = useRef();
   const bisnisIdHiddenElement = useRef();
@@ -124,7 +128,6 @@ const ProductForm = ({
     descriptionElement.current.value = productClicked?.product_description;
     priceElement.current.value = productClicked?.product_price;
     setDefaultUrl(productClicked?.product_url);
-    setSelectedFiles(null);
     setActions("Update");
   };
 
@@ -134,7 +137,7 @@ const ProductForm = ({
     productNameElement.current.value = "";
     descriptionElement.current.value = "";
     priceElement.current.value = "";
-    setDefaultUrl("http://localhost:3000/empty.jpg");
+    setDefaultUrl(AppConfig.url_image + "default.jpg");
     reset();
     setActions("Insert");
   };
@@ -154,26 +157,6 @@ const ProductForm = ({
 
   const onKategoryChangeHandler = () => {};
 
-  const onFileChange = (e) => {
-    try {
-      const choosedFile = e.target.files[0];
-
-      if (choosedFile.size > 1024 * 1024) {
-        toast.info("File Must Be Lower Than 1 Mb", {
-          closeButton: true,
-          position: "top-center",
-          autoClose: 5000,
-        });
-
-        return;
-      }
-
-      setSelectedFiles(choosedFile);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <form
       action={action}
@@ -182,9 +165,9 @@ const ProductForm = ({
       <div className="space-y-1 px-18 mt-10 ">
         {state?.completed && (
           <SuccessInfo
-            isOpen={open}
+            isOpen={isopenSuccessModal}
             onGotIt={() => {
-              setOpen(false);
+              setIsOpenSuccessModal(false);
               redirect(
                 `/product?bisnisid=${bisnisIdSelected}&categoryid=${state?.kategory_id}`
               );
@@ -211,43 +194,35 @@ const ProductForm = ({
           disabled={actions === "Update" ? true : false}
           data={bisnisDataObj}
         />
+        <ImageSelectorModal
+          isOpen={isOpenImageSelectorModal}
+          onCancel={() => {
+            setIsOpenImageSelectorModal(false);
+          }}
+          setDefaultUrl={setDefaultUrl}
+        />
 
         <div className="flex flex-row w-full justify-between gap-2">
           <div
             className="flex flex-col gap-1 justify-between hover:border-blue-500 border-1 border-slate-300 p-2 cursor-pointer rounded-2xl"
             onClick={() => {
-              fileRef.current.click();
+              setIsOpenImageSelectorModal(true);
             }}
           >
             <div className="relative h-[150px] w-[150px]">
-              {/* {selectedFiles} */}
               <img
-                src={
-                  selectedFiles
-                    ? URL.createObjectURL(selectedFiles)
-                    : defaultUrl
-                }
+                src={defaultUrl}
                 width={50}
                 height={50}
-                alt="Picture of the author"
+                alt="Product Images"
                 className="w-full rounded-2xl"
-              />
-
-              <input
-                className="w-full p-3 text-sm  cursor-pointer hidden "
-                type="file"
-                name="thumbnail"
-                defaultValue={null}
-                ref={fileRef}
-                accept="image/*"
-                onChange={onFileChange}
               />
             </div>
             <button
               type="button"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md w-full cursor-pointer"
             >
-              Pick Image
+              Pilih Gambar Product
             </button>
           </div>
           <div className="w-full flex flex-col gap-4">
@@ -609,4 +584,73 @@ const ProductItem = ({ product, productClicked, setProductClicked }) => {
   );
 };
 
+function ImageSelectorModal({ isOpen, onCancel, setDefaultUrl }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [imageList, setImageList] = useState([]);
+
+  useEffect(() => {
+    async function getImageUrl() {
+      setIsLoading(true);
+      const imageUrl = await BrowseImage();
+      setImageList(imageUrl);
+      setIsLoading(false);
+    }
+    getImageUrl();
+  }, []);
+
+  return (
+    <div
+      className={`fixed inset-0 flex justify-center items-center transition-colors z-50 ${
+        isOpen ? "visible bg-black/25" : "invisible"
+      }`}
+    >
+      <div
+        className={` bg-white rounded-xs shadow p-12 transition-all relative border-1 border-slate-400 ${
+          isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
+        }`}
+        // onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex flex-col justify-between items-center">
+          <div className="w-full flex flex-col space-y-4">
+            <span className="text-lg font-semibold">
+              Silahkan pilih gambar product .....
+            </span>
+            {isLoading ? (
+              "Loading ..."
+            ) : (
+              <div className="grid grid-cols-6 gap-y-4 gap-x-4 max-h-[500px] overflow-auto w-full">
+                {imageList?.map((imageurl) => (
+                  <div
+                    key={imageurl}
+                    className="w-full cursor-pointer rounded-lg hover:border-blue-500 border-1 border-slate-400 p-2"
+                    onClick={() => {
+                      setDefaultUrl(imageurl);
+                      onCancel();
+                    }}
+                  >
+                    <Image
+                      src={imageurl}
+                      width={100}
+                      height={100}
+                      alt={imageurl}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="w-full flex flex-row justify-end">
+            <button
+              type="button"
+              className="bg-red-500 rounded-lg py-2 px-4 text-white font-semibold mt-4 cursor-pointer mx-2"
+              onClick={onCancel}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 export default ProductFormLayout;

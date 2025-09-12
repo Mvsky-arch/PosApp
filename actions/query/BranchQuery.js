@@ -3,6 +3,7 @@ import { BranchTable } from "@/models/TableModel";
 const GetBranchById = async (id) => {
   const branch = await BranchTable.findOne({
     where: { id },
+    raw: true,
     attributes: [
       "id",
       "branchName",

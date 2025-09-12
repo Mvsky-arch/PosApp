@@ -1,7 +1,6 @@
-"use client";
 import { redirect } from "next/navigation";
 import getAuthUser from "@/lib/GetAuthUser";
-import GetStoreData, { GetStoreDataPlain } from "@/actions/query/StoreQuery";
+import GetStoreData from "@/actions/query/StoreQuery";
 import StoreSettingsPage from "@/component/page/StoreSettingsPage";
 import {
   bisnisListSort,
@@ -9,54 +8,23 @@ import {
   staffListSort,
 } from "@/lib/MapFilterLib";
 
-import { useState, useEffect } from "react";
-
-const StorePage = () => {
-  const [isLoading, setLoading] = useState(false);
-  const [data, setData] = useState({
-    bisnisList: "[]",
-    branchList: "[]",
-    staffList: "[]",
-    staffRole: "[]",
-  });
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
-    setLoading(true);
-    const authUser = await getAuthUser();
-    if (!authUser) {
-      redirect("/login");
-    }
-    const { bisnisList, branchList, staffList, staffRole } =
-      await GetStoreDataPlain(authUser?.id);
-
-    setData({
-      bisnisList,
-      branchList,
-      staffList,
-      staffRole,
-    });
-    setLoading(false);
+const StorePage = async () => {
+  const authUser = await getAuthUser();
+  if (!authUser) {
+    redirect("/login");
   }
+  const { bisnisList, branchList, staffList, staffRole } = await GetStoreData(
+    authUser?.id
+  );
 
   return (
     <div className="container mx-auto p-4 min-h-[calc(100vh-150px)]">
-      {isLoading ? (
-        "Loading ...."
-      ) : (
-        <div>
-          <StoreSettingsPage
-            bisnisList={data.bisnisList}
-            branchList={data.branchList}
-            staffList={data.staffList}
-            staffRole={data.staffRole}
-          />
-          {/* {typeof data.bisnisList} */}
-        </div>
-      )}
+      <StoreSettingsPage
+        bisnisList={JSON.stringify(bisnisListSort(bisnisList))}
+        branchList={JSON.stringify(branchListSort(branchList))}
+        staffList={JSON.stringify(staffListSort(staffList))}
+        staffRole={JSON.stringify(staffRole)}
+      />
     </div>
   );
 };

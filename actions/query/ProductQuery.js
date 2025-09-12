@@ -3,6 +3,7 @@ import { ProductTable } from "@/models/TableModel";
 export const GetProductByBisnisId = async (bisnis_id) => {
   const productList = await ProductTable.findAll({
     where: { bisnis_id },
+    raw: true,
     attributes: [
       "id",
       "product_name",
@@ -18,6 +19,7 @@ export const GetProductByBisnisId = async (bisnis_id) => {
 export const GetProductByUserId = async (id) => {
   const productList = await ProductTable.findAll({
     where: { user_id: id },
+    raw: true,
     attributes: [
       "id",
       "product_name",
