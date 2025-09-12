@@ -562,7 +562,7 @@ const ProductItem = ({ product, productClicked, setProductClicked }) => {
         }}
       >
         <span className="pl-4">
-          <Image
+          <img
             src={product.product_url}
             width={40}
             height={40}
@@ -628,7 +628,7 @@ function ImageSelectorModal({ isOpen, onCancel, setDefaultUrl }) {
                       onCancel();
                     }}
                   >
-                    <Image
+                    <img
                       src={imageurl}
                       width={100}
                       height={100}
