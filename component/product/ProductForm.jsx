@@ -210,7 +210,7 @@ const ProductForm = ({
             }}
           >
             <div className="relative h-[150px] w-[150px]">
-              <Image
+              <img
                 src={defaultUrl}
                 width={50}
                 height={50}
@@ -561,13 +561,13 @@ const ProductItem = ({ product, productClicked, setProductClicked }) => {
           setProductClicked(product);
         }}
       >
-        <span className="pl-4">
-          <Image
+        <span className="pl-4 ">
+          <img
             src={product.product_url}
             width={40}
             height={40}
             alt={product.product_url}
-            className="w-full rounded-full"
+            className="w-18 rounded-full"
           />
         </span>
         <span className="truncate_1 w-full text-sm py-4">
@@ -628,7 +628,7 @@ function ImageSelectorModal({ isOpen, onCancel, setDefaultUrl }) {
                       onCancel();
                     }}
                   >
-                    <Image
+                    <img
                       src={imageurl}
                       width={100}
                       height={100}

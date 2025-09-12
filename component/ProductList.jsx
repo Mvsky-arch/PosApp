@@ -70,13 +70,12 @@ const Product = ({ name, price, url }) => {
      justify-between cursor-pointer h-full overflow-hidden bg-white"
     >
       <div className="flex flex-row items-center justify-center w-full ">
-        <Image
+        <img
           src={url}
           width={100}
           height={100}
           alt="Product Images"
-          className="w-full "
-          unoptimized
+          className="w-full"
         />
       </div>
       <div className="w-full px-4 py-2">
